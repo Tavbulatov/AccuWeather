@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= Rails.application.credentials[:postgres][:username] %>
+  password: <%= Rails.application.credentials[:postgres][:password] %>
+
+development:
+  <<: *default
+  database: AccuWeather_development
+
+test:
+  <<: *default
+  database: AccuWeather_test
+
+production:
+  <<: *default
+  database: AccuWeather_production
+  username: AccuWeather
+  password: <%= ENV["ACCUWEATHER_DATABASE_PASSWORD"] %>
