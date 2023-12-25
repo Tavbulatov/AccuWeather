@@ -1,24 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# AccuWeather API
 
-Things you may want to cover:
+Проект предоставляет API для доступа к метеорологическим данным
 
-* Ruby version
+### Возможности:
+* Получение текущей погоды.
+* Получение исторических данных о погоде за последние 24 часа
+* Получение максимальной температуры за последние 24 час
+* Получение минимальной температуры за последние 24 час
+* Получение средней температуры за последние 24 час
+* Обновление данных о погоде в фоновом режиме
 
-* System dependencies
+### Требования
+* Rails 7.0.8
+* Ruby 3.2.2
+* PSQL
 
-* Configuration
+### Установка и настройка
 
-* Database creation
+Клонировать репозиторий:
 
-* Database initialization
+    git clone git@github.com:Tavbulatov/AccuWeather.git
 
-* How to run the test suite
+Установить зависимости:
 
-* Services (job queues, cache servers, search engines, etc.)
+    bundle install
 
-* Deployment instructions
+Настроить базу данных:
 
-* ...
+    rails db:create db:migrate
+
+Запуск сервера:
+
+    rails s
