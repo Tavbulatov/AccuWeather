@@ -17,6 +17,7 @@ class WeatherTrigger
     end
   end
 
+  private
   # Current Conditions
   def current_weather
     response = Net::HTTP.get(URI_WEATHER.to_s, "/currentconditions/v1/#{LOCATION_KEY}?apikey=#{APIKEY}&language=ru")
@@ -29,8 +30,6 @@ class WeatherTrigger
                              "/currentconditions/v1/#{LOCATION_KEY}/historical/24?apikey=#{APIKEY}&language=ru")
     create_forecasts(response, :historical)
   end
-
-  private
 
   def create_forecasts(response, type = 'current')
     result = JSON.parse(response) if response
