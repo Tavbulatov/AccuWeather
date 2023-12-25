@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
+
 <<~TEXT
   GET  |  /health(.json)                  |  v1  |  Health.
   GET  |  /weather/current(.json)         |  v1  |  Current temperature.
@@ -13,7 +17,7 @@ module Weather
     version 'v1', using: :header, vendor: 'twitter'
     format :json
 
-    rescue_from ActiveRecord::RecordNotFound do |e|
+    rescue_from ActiveRecord::RecordNotFound do |_e|
       error!({ error: 'Not Found' }, 404)
     end
 
@@ -57,7 +61,7 @@ module Weather
           Forecast.avg
         end
       end
-
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

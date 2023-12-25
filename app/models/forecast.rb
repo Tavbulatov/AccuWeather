@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Forecast < ApplicationRecord
   scope :sorted,     -> { order(created_at: :desc) }
   scope :day_ago,    -> { sorted.where('created_at > ?', 1.day.ago) }
