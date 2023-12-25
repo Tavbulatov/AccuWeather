@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class WeatherTrigger
-  APIKEY = 'gDR29qzvlxyA5TOXebs2KffjIewsz2qd'.freeze
-  LOCATION_KEY = '295609'.freeze
-  URI_WEATHER = 'dataservice.accuweather.com'.freeze
+  APIKEY = 'gDR29qzvlxyA5TOXebs2KffjIewsz2qd'
+  LOCATION_KEY = '295609'
+  URI_WEATHER = 'dataservice.accuweather.com'
 
   def self.call(type)
     new.run(type)
@@ -17,18 +19,19 @@ class WeatherTrigger
 
   # Current Conditions
   def current_weather
-    response = Net::HTTP.get("#{URI_WEATHER}", "/currentconditions/v1/#{LOCATION_KEY}?apikey=#{APIKEY}&language=ru")
+    response = Net::HTTP.get(URI_WEATHER.to_s, "/currentconditions/v1/#{LOCATION_KEY}?apikey=#{APIKEY}&language=ru")
     create_forecasts(response)
   end
 
   # Historical Current Conditions (past 24 hours)
   def hourly_historical_weather
-    response = Net::HTTP.get("#{URI_WEATHER}",
+    response = Net::HTTP.get(URI_WEATHER.to_s,
                              "/currentconditions/v1/#{LOCATION_KEY}/historical/24?apikey=#{APIKEY}&language=ru")
     create_forecasts(response, :historical)
   end
 
   private
+
   def create_forecasts(response, type = 'current')
     result = JSON.parse(response) if response
     result&.each do |weather|
