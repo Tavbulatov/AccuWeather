@@ -25,6 +25,6 @@ class Forecast < ApplicationRecord
   end
 
   def self.by_time(epoch_time)
-    ForecastByTime.call(epoch_time)
+    ForecastByTime.closest_to_given_time(epoch_time)
   end
 end

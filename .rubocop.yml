@@ -24,3 +24,6 @@ Style/Documentation:
 
 RSpec/ContextWording:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

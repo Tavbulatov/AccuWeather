@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe WeatherTrigger, type: :service do
@@ -6,9 +8,9 @@ RSpec.describe WeatherTrigger, type: :service do
       let(:current_weather) { WeatherTrigger::CurrentWeather }
 
       it 'calls the current_weather method of CurrentWeather' do
-        allow(current_weather).to receive(:current)
+        allow(current_weather).to receive(:fetch_current)
         described_class.call(:current)
-        expect(current_weather).to have_received(:current)
+        expect(current_weather).to have_received(:fetch_current)
       end
 
       it 'creates a Forecast model of type :current' do
@@ -20,13 +22,13 @@ RSpec.describe WeatherTrigger, type: :service do
       let(:historical_weather) { WeatherTrigger::HistoricalWeather }
 
       it 'calls the hourly_historical_weather method of HistoricalWeather' do
-        allow(historical_weather).to receive(:hourly_historical)
+        allow(historical_weather).to receive(:fetch_hourly_historical)
         described_class.call(:historical)
-        expect(historical_weather).to have_received(:hourly_historical)
+        expect(historical_weather).to have_received(:fetch_hourly_historical)
       end
 
       it 'creates a Forecast model of type :historical' do
-          expect { described_class.call(:historical) }.to change(Forecast, :count).by(24)
+        expect { described_class.call(:historical) }.to change(Forecast, :count).by(24)
       end
     end
   end
